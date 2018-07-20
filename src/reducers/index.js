@@ -6,28 +6,41 @@ export default (state = {
     status: "all"
 }, action) => {
 
-
-
     switch (action.type) {
         case types.add: {
-            var list = [...state.todoList];
-            var id = TODO.generateUUID();
-            list.push({id: id, content: action.content, complete: false})
-            const newState = {
-                todoList: list, status: state.status
-            }
-            return newState;
+           return {
+               todoList:[...state.todoList,action.todo],
+               status:state.status
+
+           }
+
         }
         case types.changeCheckStatus:{
 
-            var todolist = [...state.todoList];
-            var iscomplete = todolist.find((item)=>item.id ==action.id).complete;
-            todolist.find((item)=>item.id ==action.id).complete = !iscomplete;
-            const newState = {
-                todoList: todolist, status: state.status
-            }
 
+            var todoList = [...state.todoList];
+            console.log(action.id);
+            const todoLists = todoList.map((item)=>{
+                return item.id === action.id?{...item,complete:!item.complete}:item
+            })
+           // console.log(todoLists);
+            const newState = {
+                todoList: todoLists.concat(), status: state.status
+            }
             return newState;
+
+
+
+
+            //
+            // var todolist = [...state.todoList];
+            // var iscomplete = todolist.find((item)=>item.id ==action.id).complete;
+            // todolist.find((item)=>item.id ==action.id).complete = !iscomplete;
+            // const newState = {
+            //     todoList: todolist, status: state.status
+            // }
+            //
+            // return newState;
         }
         case types.changeTab:{
 

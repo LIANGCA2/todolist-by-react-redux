@@ -39,7 +39,7 @@ class TodoList extends Component {
                 this.props.todoList.map((item) => {
                     return (<li id={item.id} className={item.complete ? "checked" : ""}
                                 onDoubleClick={(event) => this.changeEditStatus(event)}
-                                onKeyDown= {(event,id)=>this.changeContent(event, item.id)}
+                                onKeyDown= {(event,id)=>this.changeContent(event, item.id)} key = {item.id}
                     >
                         <input name="done-todo" type="checkbox" className="done-todo"
                                onChange={(event, id) => this.changeCheckStatus(event, item.id)}

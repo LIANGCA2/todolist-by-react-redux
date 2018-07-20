@@ -1,12 +1,50 @@
 import TODO from "../model/TODO"
 const TodoApi = {
+    todos: [],
+    staus:"all",
 
-
-    filterByState(todoList,status){
-       return todoList.filter((item)=>status==TODO.ALL?true:status==TODO.ACTIVE?!item.complete:item.complete)
+    filterByState(status){
+        console.log("gggg")
+        console.log(this.todos)
+       return this.todos.filter((item)=>status==TODO.ALL?true:status==TODO.ACTIVE?!item.complete:item.complete)
     },
+    changeStatus(status){
+        this.staus = status;
+    },
+    changeContent(id,content){
+        let todo = this.todos.find(item => item.id === id);
+        if (todo !== undefined) {
+            todo.changeContent(content);
+        }
+        return todo;
+    },
+    getAllItem(){
+
+      return this.todos;
+    },
+    getStatus(){
+      return this.staus;
+    },
+    changeCheckStatus(id){
+        //
+        // this.todos.map((item)=>{
+        //     return item.id === id ?{...item,complete:!item.complete}:item
+        // })
+        // console.log(this.todos);
 
 
+        let todo = this.todos.find(item => item.id === id);
+        if (todo !== undefined) {
+            todo.toggleActive();
+        }
+        return todo;
+
+
+    },
+    addItem(todo){
+
+        this.todos.push(todo)
+    },
     generateUUID() {
         /*jshint bitwise:false */
         var i,

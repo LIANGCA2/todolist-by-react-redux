@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import FilterList from "../component/filterList";
 import {addItem, changeTab} from "../actions/index";
-
+import TodoApi from "../api/TodoApi"
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,7 +15,10 @@ const mapStateToProps = (state, ownProps) => {
     const mapDispatchToProps = (dispatch,ownProps)=>{
 
         return {
-            changeTab:(status) => dispatch(changeTab(status)),
+            changeTab:(status) => {
+               TodoApi.changeStatus(status);
+                dispatch(changeTab(status))
+            },
         }
 
     }

@@ -8,15 +8,23 @@ const mapStateToProps = (state, ownProps) =>{
 
     return {
 
-        todoList:TodoApi.filterByState(state.todoList,state.status)
+        // todoList:TodoApi.filterByState(state.todoList,state.status)
+        todoList:TodoApi.filterByState(TodoApi.getStatus())
     }
 }
 
 
 const mapDispatchToProps = (dispatch,ownProps)=> {
     return {
-        changeCheckStatus: (id) => dispatch(changeCheckStatus(id)),
-        changeContent:(id, content) =>dispatch(changeContent(id, content))
+        changeCheckStatus: (id) => {
+
+            TodoApi.changeCheckStatus(id);
+            dispatch(changeCheckStatus(id))
+        },
+        changeContent:(id, content) =>{
+            TodoApi.changeContent(id,content);
+            dispatch(changeContent(id, content))
+        }
     }
 
 }
