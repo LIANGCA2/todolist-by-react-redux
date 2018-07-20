@@ -1,13 +1,14 @@
 import {connect} from 'react-redux'
 import TodoList from "../component/todoList";
 import {changeCheckStatus,changeContent} from "../actions/index";
+import TodoApi from "../api/TodoApi"
 
 
 const mapStateToProps = (state, ownProps) =>{
 
     return {
 
-        todoList: state.todoList.filter((item)=>state.status=="all"?true:state.status=="active"?!item.complete:item.complete)
+        todoList:TodoApi.filterByState(state.todoList,state.status)
     }
 }
 
